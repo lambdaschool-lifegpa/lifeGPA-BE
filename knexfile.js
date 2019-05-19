@@ -14,8 +14,10 @@ module.exports = {
     seeds: { directory: './database/seeds' },
   },
   testing: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL,
+    client: 'sqlite3',
+    connection: {
+      filename: './database/lifeGpa.sqlite3',
+    },
     useNullAsDefault: true,
     migrations: {
       directory: './database/migrations',
