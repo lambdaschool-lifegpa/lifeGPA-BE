@@ -7,12 +7,16 @@ exports.up = function(knex, Promise) {
     tbl.integer('completionPoints').defaultTo(0);
     tbl
       .integer('userId')
+      .unsigned()
+      .notNullable()
       .references('id')
       .inTable('users');
 
     
     tbl
       .integer('categoryId')
+      .unsigned()
+      .notNullable()
       .foreign('categoryId')
       .references('id')
       .inTable('category');
