@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
     tbl
       .integer('userId')
       .unsigned()
-      .notNull()
+      .notNullable()
       .references('id')
       .inTable('users');
 
@@ -16,8 +16,7 @@ exports.up = function(knex, Promise) {
     tbl
       .integer('categoryId')
       .unsigned()
-      .notNull()
-      .foreign('category')
+      .notNullable()
       .references('id')
       .inTable('category');
     tbl.timestamp('created_at').defaultTo(knex.fn.now());
