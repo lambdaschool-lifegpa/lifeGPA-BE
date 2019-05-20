@@ -1,13 +1,12 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('habits', tbl => {
-    tbl.increments().unsigned();
+    tbl.increments();
 
     tbl.string('habitTitle');
     tbl.boolean('completed').defaultTo(false);
     tbl.integer('completionPoints').defaultTo(0);
     tbl
       .integer('userId')
-      .unsigned()
       .notNullable()
       .references('id')
       .inTable('users');
@@ -15,7 +14,6 @@ exports.up = function(knex, Promise) {
     
     tbl
       .integer('categoryId')
-      .unsigned()
       .notNullable()
       .foreign('categoryId')
       .references('id')
