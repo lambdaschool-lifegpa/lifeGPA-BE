@@ -1,5 +1,5 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.alterTable('habits', tbl => {
+  return knex.schema.createTable('habits', tbl => {
     tbl.increments();
 
     tbl.string('habitTitle');
@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
     tbl
       .integer('userId')
       .unsigned()
-      .notNullable()
+      .notNull()
       .references('id')
       .inTable('users');
 
@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
     tbl
       .integer('categoryId')
       .unsigned()
-      .notNullable()
+      .notNull()
       .foreign('categoryId')
       .references('id')
       .inTable('category');
