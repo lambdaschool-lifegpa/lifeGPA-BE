@@ -7,14 +7,12 @@ exports.up = function(knex, Promise) {
     tbl.integer('completionPoints').defaultTo(0);
     tbl
       .integer('userId')
-      .notNullable()
       .references('id')
       .inTable('users');
 
     
     tbl
       .integer('categoryId')
-      .notNullable()
       .foreign('categoryId')
       .references('id')
       .inTable('category');
