@@ -1,5 +1,5 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('habits', tbl => {
+  return knex.schema.alterTable('habits', tbl => {
     tbl.increments();
 
     tbl.string('habitTitle');
@@ -15,6 +15,7 @@ exports.up = function(knex, Promise) {
     tbl
       .integer('categoryId')
       .notNullable()
+      .foreign('categoryId')
       .references('id')
       .inTable('category');
     tbl.timestamp('created_at').defaultTo(knex.fn.now());
