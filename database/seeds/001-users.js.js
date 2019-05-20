@@ -6,34 +6,32 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('users').insert([
         {
-          username: 'ant305',
+          username: 'siratl',
           password:
             '$2a$10$YNk76GrgcFn6YJGQgmr1luICjYOdIz.Y3cErve1fG9YYRn6kCewFa',
-          fullName: 'Anthony Johnson',
-          email: 'anthonyjohnson_dev@icloud.com',
+          fullName: 'Elisha Atulomah',
+          email: 'elisha@gmail.com',
           userImgUrl:
             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
         },
         {
-          username: 'cartier1',
+          username: 'test-1',
           password:
             '$2a$10$YNk76GrgcFn6YJGQgmr1luICjYOdIz.Y3cErve1fG9YYRn6kCewFa',
-          fullName: 'Cartier Doyle',
-          email: 'cartier1121@gmail.com',
+          fullName: 'Rowan Atkinson',
+          email: 'mrbean@gmail.com',
           userImgUrl:
             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
         },
         {
-          username: 'liz1121',
+          username: 'bond',
           password:
             '$2a$10$YNk76GrgcFn6YJGQgmr1luICjYOdIz.Y3cErve1fG9YYRn6kCewFa',
-          fullName: 'Elizabeth Johnson',
-          email: 'lizdoyle1121@gmail.com',
+          fullName: 'James Bond',
+          email: '007@gmail.com',
           userImgUrl:
             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
         },
       ]);
     });
 };
-
-

@@ -9,7 +9,7 @@ let falseToken = '7*&TGHJVufvubyvtfu.8575tGyfiujOBIbIYFu683atsi';
 
 describe('Server Routes', () => {
   it('should set testing environment', () => {
-    expect(process.env.DB_ENV).toBe('testing');
+    expect(process.env.DB_ENV).toBe('develpment');
   });
 
   describe('GET /', () => {
