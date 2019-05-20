@@ -88,10 +88,15 @@ function login(req, res) {
   db('users')
     .where({ username: creds.username })
     .first()
-    .then(user => {
-      if (user && bcrypt.compareSync(creds.password, user.password)) {
-        const token = generateToken(user);
 
+    .then(user => {
+      // console.log("user", user, "creds", creds);
+      // console.log('hashsync', bcrypt.hashSync(creds.password, 10)); 
+      // console.log(bcrypt.compareSync(creds.password, user.password, 10 ));
+      if (bcrypt.compareSync(creds.password, user.password, 10 )) {
+        // console.log('enter');
+        const token = generateToken(user);
+        // console.log('token');
         res.status(200).json({
           message: `Welcome ${user.username}! Token registered...`,
           user,

@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs')
+
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return knex('users')
@@ -6,18 +8,17 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('users').insert([
         {
-          username: 'siratl',
-          password:
-            '$2a$10$YNk76GrgcFn6YJGQgmr1luICjYOdIz.Y3cErve1fG9YYRn6kCewFa',
-          fullName: 'Elisha Atulomah',
-          email: 'elisha@gmail.com',
+          username: 'ant305',
+          password: bcrypt.hashSync('1234', 10),
+          fullName: 'Anthony Johnson',
+          email: 'ant305@gmail.com',
           userImgUrl:
             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
         },
         {
           username: 'test-1',
           password:
-            '$2a$10$YNk76GrgcFn6YJGQgmr1luICjYOdIz.Y3cErve1fG9YYRn6kCewFa',
+          bcrypt.hashSync('1234', 10),
           fullName: 'Rowan Atkinson',
           email: 'mrbean@gmail.com',
           userImgUrl:
@@ -26,7 +27,7 @@ exports.seed = function(knex, Promise) {
         {
           username: 'bond',
           password:
-            '$2a$10$YNk76GrgcFn6YJGQgmr1luICjYOdIz.Y3cErve1fG9YYRn6kCewFa',
+          bcrypt.hashSync('1234', 10),
           fullName: 'James Bond',
           email: '007@gmail.com',
           userImgUrl:

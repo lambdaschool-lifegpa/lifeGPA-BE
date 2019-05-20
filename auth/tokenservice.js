@@ -8,9 +8,11 @@ module.exports = {
 //************ GENERATE TOKEN ***************/
 function generateToken(user) {
   const payload = {
-    subject: user.id,
+
+    id: user.id,
     username: user.username,
   };
+  const secret = "this is our little secret";
 
   const options = {
     expiresIn: '1d',
