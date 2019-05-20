@@ -17,7 +17,7 @@ exports.up = function(knex, Promise) {
       .integer('categoryId')
       .unsigned()
       .notNull()
-      .foreign('categoryId')
+      .foreign('category')
       .references('id')
       .inTable('category');
     tbl.timestamp('created_at').defaultTo(knex.fn.now());
