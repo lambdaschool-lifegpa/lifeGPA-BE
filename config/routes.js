@@ -236,7 +236,7 @@ function createHabit(req, res) {
 //******************** GET ALL HABITS ******************/
 function getHabits(req, res) {
   db('habits')
-    .where({ userId: req.decodedToken.subject })
+    .where({ userId: req.decodedToken.id })
     .then(habit => {
       res.json(habit);
     })
@@ -316,7 +316,7 @@ function deleteHabit(req, res) {
         .json({ errorMessage: `Habit with id: '${id}' does not exist.` });
     }
 
-    if (habit.userId != req.decodedToken.subject) {
+    if (habit.userId != req.decodedToken.id) {
       return res
         .status(401)
         .json({ errorMessage: 'You are not authorized to delete this Habit.' });
@@ -337,7 +337,7 @@ function deleteHabit(req, res) {
 //******************** CREATE CATEGORY ******************/
 function createCategory(req, res) {
   const { categoryTitle, color } = req.body;
-  const category = { categoryTitle, color, userId: req.decodedToken.subject };
+  const category = { categoryTitle, color, userId: req.decodedToken.id };
 
   if (!categoryTitle || !color) {
     res.status(412).json({
@@ -377,7 +377,7 @@ function createCategory(req, res) {
 //******************** GET CATEGORIES ******************/
 function getCategories(req, res) {
   db('category')
-    .where({ userId: req.decodedToken.subject })
+    .where({ userId: req.decodedToken.id })
     .then(category => {
       res.json(category);
     })
@@ -481,7 +481,7 @@ function deleteCategory(req, res) {
         .json({ errorMessage: `Category with id: '${id}' does not exist.` });
     }
 
-    if (category.userId != req.decodedToken.subject) {
+    if (category.userId != req.decodedToken.id) {
       return res.status(401).json({
         errorMessage: 'You are not authorized to delete this Category.',
       });
