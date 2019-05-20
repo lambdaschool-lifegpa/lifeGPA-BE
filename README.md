@@ -103,7 +103,7 @@ _http method_: **[POST]**
 
 ```
 {
-    "message": "Welcome siratl! Token registered...",
+    "message": "Welcome ant305! Token registered...",
     "user": {
         "id": 1,
         "username": "ant305",
