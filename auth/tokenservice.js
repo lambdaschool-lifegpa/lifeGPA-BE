@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const secret = require('../_secrets').jwtSecret;
+require('dotenv').config(); 
+
 
 module.exports = {
   generateToken,
@@ -12,7 +14,7 @@ function generateToken(user) {
     id: user.id,
     username: user.username,
   };
-  const secret = "this is our little secret";
+  // const secret = "this is our little secret";
 
   const options = {
     expiresIn: '1d',

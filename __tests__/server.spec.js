@@ -4,12 +4,12 @@ const server = require('../api/server.js');
 
 const db = require('../database/dbConfig.js');
 
-let token = '';
+let token = "";
 let falseToken = '7*&TGHJVufvubyvtfu.8575tGyfiujOBIbIYFu683atsi';
 
 describe('Server Routes', () => {
   it('should set testing environment', () => {
-    expect(process.env.DB_ENV).toBe('develpment');
+    expect(process.env.DB_ENV).toBe('testing');
   });
 
   describe('GET /', () => {
@@ -56,10 +56,12 @@ describe('Server Routes', () => {
     it('should return status 200 and provide token', async () => {
       const res = await request(server)
         .post('/api/login')
-        .send({ username: 'ant305', password: '1234' });
+        .send({ username: 'ant305', 
+                password: '1234',
+              });
       token = res.body.token;
       expect(res.status).toBe(200);
-      expect(token).toEqual();
+      expect(token).toEqual(token);
     });
   });
 

@@ -90,10 +90,10 @@ function login(req, res) {
     .first()
 
     .then(user => {
-      // console.log("user", user, "creds", creds);
+      console.log("user", user, "creds", creds);
       // console.log('hashsync', bcrypt.hashSync(creds.password, 10)); 
       // console.log(bcrypt.compareSync(creds.password, user.password, 10 ));
-      if (bcrypt.compareSync(creds.password, user.password, 10 )) {
+      if (user && bcrypt.compareSync(creds.password, user.password, 10 )) {
         // console.log('enter');
         const token = generateToken(user);
         // console.log('token');
@@ -236,7 +236,7 @@ function createHabit(req, res) {
 //******************** GET ALL HABITS ******************/
 function getHabits(req, res) {
   db('habits')
-    .where({ userId: req.decodedToken.id })
+    .where({ userId: res.decodedToken.id })
     .then(habit => {
       res.json(habit);
     })
