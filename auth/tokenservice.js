@@ -11,10 +11,10 @@ module.exports = {
 function generateToken(user) {
   const payload = {
 
-    id: user.id,
+    subject: user.id,
     username: user.username,
   };
-  // const secret = "this is our little secret";
+  
 
   const options = {
     expiresIn: '1d',

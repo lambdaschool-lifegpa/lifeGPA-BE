@@ -90,7 +90,7 @@ function login(req, res) {
     .first()
 
     .then(user => {
-      console.log("user", user, "creds", creds);
+      // console.log("user", user, "creds", creds);
       // console.log('hashsync', bcrypt.hashSync(creds.password, 10)); 
       // console.log(bcrypt.compareSync(creds.password, user.password, 10 ));
       if (user && bcrypt.compareSync(creds.password, user.password, 10 )) {
@@ -193,18 +193,19 @@ function deleteUser(req, res) {
 
 //******************** CREATE HABIT ******************/
 function createHabit(req, res) {
+  
   const { habitTitle, categoryId } = req.body;
   const newHabit = {
     habitTitle,
-    userId: req.decodedToken.subject,
+    userId: res.decodedToken.subject,
     categoryId,
     completed: false,
     completionPoints: 0,
+    
   };
-
   if (!habitTitle || !categoryId) {
     res.status(412).json({
-      errorMessage: 'The habitTitle and categoryId are Required fields.',
+      Message: 'The habitTitle and categoryId are Required fields.',
     });
   }
 
@@ -212,9 +213,9 @@ function createHabit(req, res) {
     .insert(newHabit)
     .then(ids => {
       const id = ids[0];
-
       db('habits')
         .where({ id })
+        
         .first()
         .then(habit => {
           res
@@ -224,11 +225,11 @@ function createHabit(req, res) {
               habit,
             })
             .catch(err =>
-              res.status(500).json({ errorMessage: 'Error creating Habit.' }),
+              res.status(500).json({ Message: 'Error creating Habit.' }),
             );
         })
         .catch(err =>
-          res.status(500).json({ errorMessage: 'Habit could not be created.' }),
+          res.status(500).json({ Message: 'Habit could not be created.' }),
         );
     });
 }
@@ -236,7 +237,7 @@ function createHabit(req, res) {
 //******************** GET ALL HABITS ******************/
 function getHabits(req, res) {
   db('habits')
-    .where({ userId: res.decodedToken.id })
+    .where({ userId: res.decodedToken.subject })
     .then(habit => {
       res.json(habit);
     })
@@ -316,7 +317,7 @@ function deleteHabit(req, res) {
         .json({ errorMessage: `Habit with id: '${id}' does not exist.` });
     }
 
-    if (habit.userId != req.decodedToken.id) {
+    if (habit.userId != res.decodedToken.subject) {
       return res
         .status(401)
         .json({ errorMessage: 'You are not authorized to delete this Habit.' });
@@ -337,7 +338,7 @@ function deleteHabit(req, res) {
 //******************** CREATE CATEGORY ******************/
 function createCategory(req, res) {
   const { categoryTitle, color } = req.body;
-  const category = { categoryTitle, color, userId: req.decodedToken.id };
+  const category = { categoryTitle, color, userId: res.decodedToken.subject };
 
   if (!categoryTitle || !color) {
     res.status(412).json({
@@ -377,7 +378,7 @@ function createCategory(req, res) {
 //******************** GET CATEGORIES ******************/
 function getCategories(req, res) {
   db('category')
-    .where({ userId: req.decodedToken.id })
+    .where({ userId: res.decodedToken.subject})
     .then(category => {
       res.json(category);
     })
@@ -481,7 +482,7 @@ function deleteCategory(req, res) {
         .json({ errorMessage: `Category with id: '${id}' does not exist.` });
     }
 
-    if (category.userId != req.decodedToken.id) {
+    if (category.userId != res.decodedToken.subject) {
       return res.status(401).json({
         errorMessage: 'You are not authorized to delete this Category.',
       });
